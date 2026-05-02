@@ -1,10 +1,16 @@
-# 🧹 messy-data-to-clean-data-project
+# 🧹 Messy Data to Clean Data | Data Cleaning & Preprocessing Project
 
 ## 📌 Overview
 
-This project demonstrates how to clean and preprocess messy real-world data using Python. It focuses on transforming raw, inconsistent datasets into a structured format suitable for analysis and modeling.
+This project demonstrates how messy, inconsistent real-world data can be transformed into a clean, structured dataset using Python.
 
-The project includes handling missing values, fixing inconsistent formats, removing outliers, and preparing data for further use in analytics or machine learning.
+It covers practical data cleaning techniques such as handling missing values, fixing inconsistent formats, removing outliers, and preparing data for analysis or machine learning workflows.
+
+---
+
+## 🎯 Project Objective
+
+To simulate real-world data cleaning challenges and demonstrate hands-on skills in preparing raw datasets for data analysis.
 
 ---
 
@@ -17,6 +23,16 @@ The project includes handling missing values, fixing inconsistent formats, remov
 * Converting incorrect data types
 * Basic Exploratory Data Analysis (EDA)
 * Data visualization using `matplotlib`
+
+---
+
+## 🧠 Skills Demonstrated
+
+* Data Cleaning & Wrangling
+* Data Preprocessing
+* Exploratory Data Analysis (EDA)
+* Regex-based Data Extraction
+* Handling Missing Data & Outliers
 
 ---
 
@@ -33,7 +49,7 @@ The project includes handling missing values, fixing inconsistent formats, remov
 ## 📂 Project Structure
 
 ```
-data-cleaning-project/
+messy-data-to-clean-data/
 │
 ├── data/
 │   └── raw_data.csv
@@ -52,21 +68,9 @@ data-cleaning-project/
 
 ## ⚙️ Installation
 
-1. Clone the repository:
-
 ```bash
-git clone https://github.com/your-username/data-cleaning-project.git
-```
-
-2. Navigate to the project folder:
-
-```bash
-cd data-cleaning-project
-```
-
-3. Install dependencies:
-
-```bash
+git clone https://github.com/your-username/messy-data-to-clean-data.git
+cd messy-data-to-clean-data
 pip install -r requirements.txt
 ```
 
@@ -74,13 +78,11 @@ pip install -r requirements.txt
 
 ## ▶️ Usage
 
-Run Jupyter Notebook:
-
 ```bash
 jupyter notebook
 ```
 
-Open the notebook:
+Open:
 
 ```
 notebook/data_cleaning.ipynb
@@ -88,20 +90,80 @@ notebook/data_cleaning.ipynb
 
 ---
 
-## 📊 Tasks Performed
+## 🔍 Sample Work (Before vs After Cleaning)
 
-* Cleaned inconsistent and messy data
-* Extracted numeric values from strings using regex
-* Handled missing and null values
-* Removed or capped outliers
-* Standardized categorical data
-* Converted data into proper formats
+### 📌 Example 1: Extracting Age from Messy Data
+
+**Before:**
+
+```python
+df['Age'] = ['23 years', 'Age: 45', 'Thirty', None]
+```
+
+**Cleaning Code:**
+
+```python
+import re
+
+def extract_age(age):
+    age_num = re.findall('[0-9]+', str(age))
+    return int(age_num[0]) if age_num else None
+
+df['Age'] = df['Age'].apply(extract_age)
+```
+
+**After:**
+
+```
+[23, 45, None, None]
+```
+
+---
+
+### 📌 Example 2: Handling Missing Values
+
+**Before:**
+
+```python
+df['Salary'].isnull().sum()
+```
+
+**Cleaning Code:**
+
+```python
+df['Salary'] = df['Salary'].fillna(df['Salary'].median())
+```
+
+---
+
+### 📌 Example 3: Removing Outliers
+
+**Cleaning Code (IQR Method):**
+
+```python
+Q1 = df['Salary'].quantile(0.25)
+Q3 = df['Salary'].quantile(0.75)
+IQR = Q3 - Q1
+
+df = df[(df['Salary'] >= Q1 - 1.5 * IQR) & 
+        (df['Salary'] <= Q3 + 1.5 * IQR)]
+```
+
+---
+
+## 🔍 Before vs After Summary
+
+* Fixed inconsistent formats (text → numeric)
+* Handled missing values efficiently
+* Removed extreme outliers
+* Standardized categorical values
+* Improved overall data quality
+
+✅ Final Result: Clean, structured, analysis-ready dataset
 
 ---
 
 ## 📈 Output
-
-The cleaned dataset is saved as:
 
 ```
 output/cleaned_data.csv
@@ -113,8 +175,18 @@ output/cleaned_data.csv
 
 * Build automated data cleaning pipeline
 * Integrate with machine learning workflow
-* Add interactive dashboards
-* Deploy as a web-based data cleaning tool
+* Add dashboards for visualization
+* Deploy as a web-based tool
+
+---
+
+## 📌 Use Case
+
+This project is useful for:
+
+* Data Analyst beginners
+* Data Science learners
+* Anyone working with messy real-world datasets
 
 ---
 
@@ -127,4 +199,4 @@ B.Tech CSE | Aspiring Data Analyst
 
 ## ⭐ Support
 
-If you found this project useful, consider giving it a ⭐ on GitHub!
+If you found this project useful, give it a ⭐ on GitHub!
